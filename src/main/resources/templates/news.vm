@@ -1,0 +1,48 @@
+<html>
+<body>
+<pre>
+Hello VM.
+
+## 你看不到我
+
+#*
+这里都看到
+ *#
+value1:$!{value1}    ##velocity
+$!{value2}
+${value3}
+#foreach($color in $colors)
+    Color $!{foreach.index}/$!{foreach.count}:$!{color}
+#end
+
+#foreach($key in $map.keySet())
+    Number $!{foreach.index}/$!{foreach.count}:$!{key} $map.get($key)
+#end
+
+
+    #foreach($kv in $map.entrySet())
+        Number $!{foreach.index}/$!{foreach.count}:$!{kv.key} $!{kv.value}
+    #end
+
+User:$!{user.name}
+User:$!{user.getName()}
+#set($title="nowcoder")
+Include: #include("header.vm") <br>   ##包含部分模板
+Parse: #parse("header.vm")          ##解析
+
+#macro(render_color,$color,$index)    ##定义函数
+Color By Macro $index,$color
+#end
+#foreach($color in $colors)
+     #render_color($color,$foreach.index)
+#end
+
+#set($hello="hello")
+#set($hword1 = "$!{hello} world")
+#set($hword2 = '$!{hello} world')
+hworld1:$hword1
+hworld2:$hword2
+$!{colors.size()}
+</pre>
+</body>
+</html>
